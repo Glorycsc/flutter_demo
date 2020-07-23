@@ -7,7 +7,7 @@ class LoadingScreen extends StatefulWidget {
 //  final AppBar appBar;
 //  LoadingScreen({Key key, @required this.appBar}) : super(key: key);
 //
-  @override
+  @override //如果是Stateful的组件必须覆写createState()方法
   _LoadingScreenState createState() => _LoadingScreenState();
 }
 
@@ -20,6 +20,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
 
+  //过渡页
   void loading() async{
     Future.delayed(Duration(seconds: 0), () {
       Navigator.pushReplacement(

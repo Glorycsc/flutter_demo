@@ -3,24 +3,24 @@ import 'package:hicoffee/screens/home_screen.dart';
 import 'package:hicoffee/screens/loading_screen.dart';
 import 'package:hicoffee/screens/custom_drawer_guitar.dart';
 
-void main() {
+void main() { //应用入口
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget { //StatelessWidget无状态的组件
   @override
   Widget build(BuildContext context) {
     AppBar appBar = AppBar();
-    Widget child = HomeScreen(appBar: appBar);
-    child = CustomGuitarDrawer(child: child);
+    Widget child = HomeScreen(appBar: appBar); //活动区域
+    child = CustomGuitarDrawer(child: child); //定义局部变量
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
+    return MaterialApp( //返回组件 - 外部整个tou屏幕
+      debugShowCheckedModeBanner: false, //是否显示左上角的debug提示斜线
 
       theme: ThemeData(
 //        scaffoldBackgroundColor: Color(0xFFccffff),
 //        scaffoldBackgroundColor: Color(0xFFccebff), // abi kam rang
-        scaffoldBackgroundColor: Color(0xFFe6f3ff),
+        scaffoldBackgroundColor: Color(0xFFe6f3ff), //脚手架
 //        primaryColor: Color.fromRGBO(212, 244, 255, 1),
 //        primaryColor: Color(0xFF80ccff), // abi ye kam por rang
         primaryColor: Color(0xFF99ceff),
