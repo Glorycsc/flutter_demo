@@ -1,5 +1,6 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterintexspa/pages/schedule/AddScheduleViewPage.dart';
 
 class ScheduleListViewPage extends StatefulWidget {
 
@@ -11,10 +12,10 @@ class _ScheduleListViewPageState extends State<ScheduleListViewPage> {
 
   @override
   Widget build(BuildContext context) {
-
+    bool check = true;
     List<String> getDataList() {
       List<String> list = [];
-      for (int i = 0; i < 5; i++) {
+      for (int i = 0; i < 7; i++) {
         list.add(i.toString());
       }
       return list;
@@ -41,32 +42,129 @@ class _ScheduleListViewPageState extends State<ScheduleListViewPage> {
 //            Navigator.push(context, MaterialPageRoute(builder: (context) => DeviceSpaPage()));
           },
           child: Container(
-            color: Colors.blue,
+            color: Colors.indigo,
             alignment: Alignment.center,
-            child: Column(
+            child: Row(
               children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Icon(Icons.fiber_manual_record),
-                    Text(
-                        'ONLINE'),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.end,
+                Expanded(
+                  child: Container(
+                    child: Column(
                       children: <Widget>[
-                        Icon(
-                          Icons.settings,),
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.all(2.0),
+                            margin: EdgeInsets.all(2.0),
+                            child: Row(
+                              children: <Widget>[
+                                Text("02:25 PM", style: TextStyle(color: Colors.white, fontSize: 15),),
+                                Text(
+                                  '20 C' ,style: TextStyle(color: Colors.greenAccent, fontSize: 15),),
+                                Text("1Hrs", style: TextStyle(color: Colors.greenAccent, fontSize: 13),),
+                              ],
+                            ),
+                          ),
+                          flex: 1,
+                        ),
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.all(2.0),
+                            margin: EdgeInsets.all(2.0),
+                            child: Row(
+                              children: <Widget>[
+                                Column(
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: Text("Once" ,style: TextStyle(color: Colors.white, fontSize: 12,),textAlign: TextAlign.left,),
+                                      flex: 1,
+                                    ),
+                                    Expanded(
+                                      child: Text("2020/07/30", style: TextStyle(color: Colors.white, fontSize: 12),),
+                                      flex: 1,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          flex: 1,
+                        ),
                       ],
                     ),
-                  ],
+                  ),
+                  flex: 5,
                 ),
-                Text('questMD01'),
+                Expanded(
+                  child: Switch(
+                  value: check,
+                  activeColor: Colors.blue,     // 激活时原点颜色
+                  onChanged: (bool val) {
+                    this.setState(() {
+                      check = !check;
+                    });
+                  },
+                ),
+                  flex: 1,
+                ),
               ],
             ),
           ),
         ),
       );
     }
+
+//    Row(
+//      children: <Widget>[
+//        Expanded(
+//          child: Row(
+//            children: <Widget>[
+//              Expanded(
+//                child: Column(
+//                  children: <Widget>[
+//                    Expanded(
+//                      child: Row(
+//                        children: <Widget>[
+//                          Text("02:25 PM", style: TextStyle(color: Colors.white, fontSize: 15),),
+//                          Text(
+//                            '20 C' ,style: TextStyle(color: Colors.greenAccent, fontSize: 15),),
+//                          Text("1Hrs", style: TextStyle(color: Colors.greenAccent, fontSize: 13),),
+//                        ],
+//                      ),
+//                      flex: 1,
+//                    ),
+//                    Expanded(
+//                      child: Row(
+//                        crossAxisAlignment: CrossAxisAlignment.end,
+//                        mainAxisAlignment: MainAxisAlignment.end,
+//                        children: <Widget>[
+//                          Text("Once" ,style: TextStyle(color: Colors.white, fontSize: 12),),
+//                          Text("2020/07/30"),
+//                        ],
+//                      ),
+//                      flex: 1,
+//                    ),
+//                  ],
+//                ),
+//              ),
+//            ],
+//          ),
+//          flex: 5,
+//        ),
+
+//        Expanded(
+//          child: Switch(
+//            value: check,
+//            activeColor: Colors.blue,     // 激活时原点颜色
+//            onChanged: (bool val) {
+//              this.setState(() {
+//                check = !check;
+//              });
+//            },
+//          ),
+//          flex: 1,
+//        ),
+//      ],
+//    ),
+
 
 
     return Scaffold(
@@ -76,7 +174,8 @@ class _ScheduleListViewPageState extends State<ScheduleListViewPage> {
         actions: <Widget>[
           IconButton(icon: Icon(Icons.add), onPressed: () {
             print('添加设备');
-            BotToast.showText(text: "功能还在开发中！");
+            BotToast.showText(text: "添加schedule");
+            Navigator.push(context, MaterialPageRoute(builder: (context) => AddScheduleViewPage()));
           }),
         ],
       ),
@@ -160,8 +259,8 @@ class _ScheduleListViewPageState extends State<ScheduleListViewPage> {
                   Expanded(
                     child: Container(
                       child: ListView.builder(
-                        padding: EdgeInsets.all(10.0),
-                        itemExtent: 50.0,
+                        padding: EdgeInsets.all(2.0),
+                        itemExtent: 70.0,
                         itemCount: 7,
                         itemBuilder: (BuildContext context, int index) {
                           return getItemContainer(datas[index]);
