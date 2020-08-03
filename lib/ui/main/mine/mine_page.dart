@@ -1,3 +1,4 @@
+import 'package:MilletFlutterApp/constant/app_images.dart';
 import 'package:flutter/material.dart';
 
 class MinePage extends StatefulWidget {
@@ -14,7 +15,18 @@ class MinePageState extends State<MinePage> {
       appBar: AppBar(
         title: Text("我的"),
       ),
-      body: Text('我的'),
+        body: new Column(
+          children: <Widget>[
+            new Container(
+              child: GestureDetector(
+                  child: Text('退出登录'),
+                  onTap:(){
+                    Navigator.pop(context);
+                  }
+              ),
+            )
+          ],
+        )
     );
   }
 }

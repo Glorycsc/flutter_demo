@@ -80,7 +80,7 @@ class LcfarmLogInterceptor extends Interceptor {
       logPrint("uri: ${err.request.uri}");
       logPrint("$err");
       if (err.response != null) {
-        _printResponse(err.response);
+        _printResponse(err.response); //打印错误信息
       }
       logPrint("");
     }

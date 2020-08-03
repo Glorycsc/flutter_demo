@@ -9,7 +9,7 @@
         android:top="200dp">
         <bitmap
             android:gravity="top|center_horizontal"
-            android:src="@mipmap/ic_launcher_top_logo">
+            android:src="@mipmap/ic_launcher">
 
         </bitmap>
     </item>

@@ -26,9 +26,9 @@ class LoginVModel extends BaseRefreshListVModel {
       Fluttertoast.showToast(msg: "请输入密码密码");
       return;
     }
-    apiService.getInfo().then((value) => {
-      _articleBeanList = value,
-      notifyListeners(),
+    apiService.getAuth().then((value) => {
+//      _articleBeanList = value,
+//      notifyListeners(),
       NavigatorUtil.push(context, MainPage())
     }).catchError((value) {
       Fluttertoast.showToast(msg: value);

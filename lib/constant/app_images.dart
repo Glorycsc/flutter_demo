@@ -4,6 +4,8 @@ class AppImages {
 
   /// 登录界面
   static const String login_top_logo = "assets/images/ic_login_top_logo.png";
+  static const String login_bg = "assets/images/bg_login.png";
+  static const String logo_login = "assets/images/icon_toplogo.png";
 
   /// 主页
   /// 主页图标

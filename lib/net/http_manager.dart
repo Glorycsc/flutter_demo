@@ -1,6 +1,8 @@
 import 'dart:core';
+import 'dart:io';
 
 import 'package:MilletFlutterApp/bean/base/base_bean.dart';
+import 'package:MilletFlutterApp/net/lcfarm_log_interceptor.dart';
 import 'package:MilletFlutterApp/util/log_util.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
@@ -52,6 +54,7 @@ class HttpManager {
       BaseOptions options = BaseOptions(
         connectTimeout: CONNECT_TIMEOUT,
         receiveTimeout: RECEIVE_TIMEOUT,
+        headers: httpHeaders,
       );
       _client = Dio(options);
 //        ..httpClientAdapter = Http2Adapter(
@@ -77,6 +80,7 @@ class HttpManager {
       baseUrl: baseUrl,
       connectTimeout: connectTimeout,
       receiveTimeout: receiveTimeout,
+      headers: httpHeaders,
     );
     if (interceptors != null && interceptors.isNotEmpty) {
       _client.interceptors..addAll(interceptors);
@@ -195,10 +199,11 @@ class HttpManager {
           options: options,
           cancelToken: cancelToken);
       BaseBean baseBean = BaseBean.fromJson(response.data);
-      if (baseBean.errorCode == 0) {
+
+      if (response.statusCode==200) {
         //成功
         if (successCallback != null) {
-          successCallback(baseBean.data);
+          successCallback(response.data); //返回数据
         }
       } else {
         //失败
@@ -482,8 +487,9 @@ class HttpManager {
           options: options,
           cancelToken: cancelToken);
       BaseBean baseBean = BaseBean.fromJson(response.data);
-      int statusCode = baseBean.errorCode;
-      if (statusCode == 0) {
+      int statusCode = response.statusCode;
+//      int statusCode = baseBean.errorCode;
+      if (statusCode == 200) {
         //成功
         if (jsonParse != null) {
           return jsonParse(baseBean.data);
@@ -617,9 +623,11 @@ class HttpManager {
           queryParameters: params,
           options: options,
           cancelToken: cancelToken);
+      log2Console(response);
       BaseBean baseBean = BaseBean.fromJson(response.data);
       int statusCode = baseBean.errorCode;
-      if (statusCode == 0) {
+      int stCode = response.statusCode;
+      if (stCode == 200) {
         //成功
         if (jsonParse != null) {
           return jsonParse(baseBean.data);
@@ -664,3 +672,9 @@ class HttpManager {
     return url;
   }
 }
+/// 自定义Header
+Map<String, dynamic> httpHeaders = {
+  'Accept': 'text/plain',
+  'Content-Type': 'application/json-patch+json',
+//  'token': DioUtils.TOKEN
+};
